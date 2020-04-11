@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx_reaction_test/repository/repository.dart';
 import 'package:mockito/mockito.dart' as mockito;
 
@@ -18,7 +19,7 @@ main() {
     mockito.when(_service.fetchData()).thenAnswer((_) => Future.value("Done!"));
 
     _repository.incrementCounter();
-
+    await asyncWhen((_) => _repository.data != null);
     //If I delay here the test will pass
     //await Future.delayed(Duration(seconds: 1));
 
